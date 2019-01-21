@@ -10,7 +10,7 @@ module.exports = function () {
         level: 'error',
         transports: [
             new transports.File({ filename: 'error.log', level: 'error' }),
-            new transports.MongoDB({ db: 'mongodb://locahost/newApi' })
+            new transports.MongoDB({ db: 'mongodb://localhost/newApi' })
         ],
         exceptionHandlers: [
             new transports.File({ filename: 'uncaughtExeption.log', }),
@@ -18,5 +18,5 @@ module.exports = function () {
         ],
         exitOnError: false
     });
-    module.exports.looger = looger;
+    module.exports.logger = logger;
 }

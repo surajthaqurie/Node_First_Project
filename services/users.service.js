@@ -1,4 +1,6 @@
 const { User } = require('../models/user');
+const _ = require('lodash');
+const bcrypt = require('bcrypt');
 
 module.exports.getUser = async (data) => {
     const user = await User.find().sort('name');
@@ -11,7 +13,8 @@ module.exports.createUser = async (data) => {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
     await user.save();
-    return user;
+    const token = user.generateAuthToken();
+    return { token, user };
 }
 module.exports.updateUser = async (id, data) => {
     let user = await User.findOneAndUpdate({ _id: id }, data,

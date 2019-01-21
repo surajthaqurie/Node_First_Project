@@ -25,7 +25,7 @@ module.exports.putUser = async (req, res) => {
     let userId = req.params.id;
 
     UserService.updateUser(userId, user)
-        .then(user => user ? res.json(user) : res.status(400).send('the given id is not found'))
+        .then(userObje => userObje ? res.json(userObje) : res.status(400).send('the given id is not found'))
         .catch(err => console.log('error occured', err));
 
 }
@@ -35,7 +35,7 @@ module.exports.deleteUser = async (req, res) => {
         .then(user => user ? res.json(user) : res.status(400).send('this user is not found..'))
         .catch(err => console.log('Error Occured', err));
 }
-module.exports.getUserById = async (res, res) => {
+module.exports.getUserById = async (req, res) => {
     let userId = req.params.id;
     UserService.getOneUser(userId)
         .then(user => user ? res.send(user) : res.status(400).send('the give user is not found..'))
